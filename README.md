@@ -25,7 +25,7 @@ This framework combines:
 ## Running the Dashboard
 
 ### Live Demo
-The dashboard is deployed at: [INSERT STREAMLIT CLOUD URL]
+The dashboard is deployed at: (https://pbu-mould-scheduling-gkd2j5u5ukru565fvfbg5x.streamlit.app)
 
 ### Run Locally
 ```bash
