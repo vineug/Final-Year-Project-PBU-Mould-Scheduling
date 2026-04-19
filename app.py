@@ -641,11 +641,12 @@ def draw_mould_layout_plotly(placement, mould, step_label):
 
         corner_colors = {"NW": "#4C72B0", "NE": "#DD8452",
                          "SW": "#55A868", "SE": "#C44E52"}
+        
         corner_cfg = {
-            "NW": {"origin": (0, L), "h_dir": -1, "v_dir": +1},
-            "NE": {"origin": (L, L), "h_dir": +1, "v_dir": +1},
-            "SW": {"origin": (0, 0), "h_dir": -1, "v_dir": -1},
-            "SE": {"origin": (L, 0), "h_dir": +1, "v_dir": -1},
+            "NW": {"origin": (0, L), "h_dir": +1, "v_dir": -1},
+            "NE": {"origin": (L, L), "h_dir": -1, "v_dir": -1},
+            "SW": {"origin": (0, 0), "h_dir": +1, "v_dir": +1},
+            "SE": {"origin": (L, 0), "h_dir": -1, "v_dir": +1},
         }
         thick = L * 0.04
 
@@ -686,14 +687,14 @@ def draw_mould_layout_plotly(placement, mould, step_label):
                 cfg = corner_cfg[corner]
                 ox, oy = cfg["origin"]
                 fig.add_annotation(
-                    x=ox + cfg["h_dir"] * L * 0.15,
-                    y=oy + cfg["v_dir"] * L * 0.15,
+                    x=ox + cfg["h_dir"] * L * 0.1,
+                    y=oy + cfg["v_dir"] * L * 0.1,
                     text=f"{corner}<br>(empty)", showarrow=False,
                     font=dict(size=8, color="gray"))
 
         fig.update_layout(
-            xaxis=dict(range=[-L * 0.8, L * 1.8], scaleanchor="y"),
-            yaxis=dict(range=[-L * 0.8, L * 1.8]),
+            xaxis=dict(range=[-L * 0.1, L * 1.1], scaleanchor="y"),
+            yaxis=dict(range=[-L * 0.1, L * 1.1]),
         )
 
     elif mould["mould_type"] == "cross":
