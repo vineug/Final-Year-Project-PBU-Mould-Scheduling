@@ -678,8 +678,8 @@ def draw_mould_layout_plotly(placement, mould, step_label):
             cy = (min(ys) + max(ys)) / 2
             p = info["panel"]
             fig.add_annotation(x=cx, y=cy, text=f"{p['panel_id']}<br>{info['a_len']}×{info['b_len']}",
-                               showarrow=False, font=dict(size=9),
-                               bgcolor="white", opacity=0.85)
+                               showarrow=False, font=dict(size=9, color=black),
+                               bgcolor="rgba(255,255,255,0.95)", bordercolor="gray", borderwidth=1, borderpad=3, opacity=0.85)
 
         # Empty corner labels
         for corner in CORNERS:
@@ -754,8 +754,8 @@ def draw_mould_layout_plotly(placement, mould, step_label):
 
                 xs = [p[0] for p in pts]
                 ys = [p[1] for p in pts]
-                cx = (min(xs) + max(xs)) / 2
-                cy = (min(ys) + max(ys)) / 2
+                cx = (pts[0][0] + pts[1][0]) / 2
+                cy = (pts[0][1] + pts[2][1]) / 2
                 p = info["panel"]
                 fig.add_annotation(x=cx, y=cy,
                    text=f"{p['panel_id']}<br>a={info['a_len']} b={info['b_len']}",
