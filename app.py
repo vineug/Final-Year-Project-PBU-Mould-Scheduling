@@ -637,7 +637,7 @@ def draw_mould_layout_plotly(placement, mould, step_label):
         L = int(mould["max_length"])
         # Mould boundary
         fig.add_shape(type="rect", x0=0, y0=0, x1=L, y1=L,
-                      line=dict(color="black", width=2), fillcolor="rgba(0,0,0,0)")
+              line=dict(color="black", width=3), fillcolor="rgba(245,245,245,0.3)")
 
         corner_colors = {"NW": "#4C72B0", "NE": "#DD8452",
                          "SW": "#55A868", "SE": "#C44E52"}
@@ -669,7 +669,7 @@ def draw_mould_layout_plotly(placement, mould, step_label):
             path = "M " + " L ".join(f"{x} {y}" for x, y in pts) + " Z"
             fig.add_shape(type="path", path=path,
                           fillcolor=color, opacity=0.6,
-                          line=dict(color="black", width=1))
+                          line=dict(color="black", width=1.5))
 
             # Label
             xs = [p[0] for p in pts]
@@ -686,15 +686,16 @@ def draw_mould_layout_plotly(placement, mould, step_label):
             if corner not in (placement or {}):
                 cfg = corner_cfg[corner]
                 ox, oy = cfg["origin"]
-                fig.add_annotation(
-                    x=ox + cfg["h_dir"] * L * 0.1,
-                    y=oy + cfg["v_dir"] * L * 0.1,
-                    text=f"{corner}<br>(empty)", showarrow=False,
-                    font=dict(size=8, color="gray"))
+                fig.add_annotation(x=cx, y=cy, text=f"{p['panel_id']}<br>a={info['a_len']} b={info['b_len']}",
+                   showarrow=False, font=dict(size=9, color="black"),
+                   bgcolor="rgba(255,255,255,0.9)", bordercolor="gray", borderwidth=1,
+                   borderpad=3)
 
         fig.update_layout(
-            xaxis=dict(range=[-L * 0.1, L * 1.1], scaleanchor="y"),
-            yaxis=dict(range=[-L * 0.1, L * 1.1]),
+            xaxis=dict(range=[-L * 0.1, L * 1.1], scaleanchor="y",
+                       showgrid=False, zeroline=False),
+            yaxis=dict(range=[-L * 0.1, L * 1.1],
+                       showgrid=False, zeroline=False),
         )
 
     elif mould["mould_type"] == "cross":
@@ -757,9 +758,10 @@ def draw_mould_layout_plotly(placement, mould, step_label):
                 cy = (min(ys) + max(ys)) / 2
                 p = info["panel"]
                 fig.add_annotation(x=cx, y=cy,
-                                   text=f"{p['panel_id']}<br>{info['a_len']}×{info['b_len']}",
-                                   showarrow=False, font=dict(size=9),
-                                   bgcolor="white", opacity=0.85)
+                   text=f"{p['panel_id']}<br>a={info['a_len']} b={info['b_len']}",
+                   showarrow=False, font=dict(size=9, color="black"),
+                   bgcolor="rgba(255,255,255,0.9)", bordercolor="gray", borderwidth=1,
+                   borderpad=3)
             else:
                 fig.add_annotation(x=bx + Q * 0.5, y=by + Q * 0.5,
                                    text=f"{qname}<br>(empty)",
