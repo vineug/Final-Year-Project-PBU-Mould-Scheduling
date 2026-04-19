@@ -1101,9 +1101,9 @@ if run_button or "schedule_df" in st.session_state:
                     st.markdown(
                         f"- **{slot}**: `{p['panel_id']}` — "
                         f"a={info['a_len']}mm, b={info['b_len']}mm "
-                        f"(ceil={p['has_ceiling']}, "
-                        f"recess={p['has_recess']}, "
-                        f"open={p['num_openings']})"
+                        f"({'Has ceiling' if int(p['has_ceiling']) else 'No ceiling'}, "
+                        f"{'Has recess' if int(p['has_recess']) else 'No recess'}, "
+                        f"{p['num_openings']} opening{'s' if int(p['num_openings']) != 1 else ''})"
                     )
 
     # tab 3: cycle details
